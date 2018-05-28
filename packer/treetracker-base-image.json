@@ -1,0 +1,22 @@
+{
+  "variables":{
+    "my_token":""
+  },
+  "builders":[
+    {
+      "type":"digitalocean",
+      "ssh_username":"root",
+      "api_token":"{{ user `my_token` }}",
+      "image":"ubuntu-16-04-x64",
+      "region":"sfo2",
+      "snapshot_name":"tt-test",
+      "size":"s-2vcpu-4gb"
+    }
+  ],
+  "provisioners":[
+    {
+      "type":"shell",
+      "script":"{{template_dir}}/../scripts/configuration.sh"
+    }
+  ]
+}
