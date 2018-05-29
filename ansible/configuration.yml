@@ -2,6 +2,7 @@
 - name: Configure Treetracker App Instance
   hosts: all
   gather_facts: false
+  become: true
 
   pre_tasks:
     - name: Install python for Ansible to work
@@ -11,6 +12,11 @@
 ## Todo here: all the steps in the configuration.sh script in order to prebake
 #  a packer image.
   tasks:
+    - name: initial dist upgrade
+      apt:
+        upgrade: dist
+        update_cache: yes
+        cache_valid_time: 3600
     - name: Add 'deploy' user
       user:
         name: deploy
