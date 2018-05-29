@@ -1,0 +1,9 @@
+---
+- name: Deploy Treetracker app(s)
+  hosts: treetracker-app
+  tasks:
+    - name: Fetch the latest version of application 1 code
+      git:
+        repo:
+        dest:
+      register: ttadminclone
