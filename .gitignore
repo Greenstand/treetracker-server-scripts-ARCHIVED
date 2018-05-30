@@ -1,0 +1,6 @@
+packer/variables.json
+ansible/*.retry
+
+# Vagrant
+.vagrant/
+*.log

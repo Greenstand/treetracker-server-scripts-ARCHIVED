@@ -1,14 +1,21 @@
 # treetracker-server-scripts
 
-Configuration and deployment scripts are being worked on in the `scripts` directory. This sets up a new Ubuntu 16.04 Linux system with the dependencies (Nginx, Node.js, Postgres) required to run the treetracker project code.
+This repo tracks infrastructure as code improvements for the Treetracker project. Right now there is a Packer template used to create a DigitalOcean base image snapshot, and configuration derived from an Ansible playbook. This sets up a new Ubuntu 16.04 Linux system with the dependencies (Nginx, Node.js, Postgres) required to run the treetracker project code.
 
 ## TODO
 
-* Add UFW rule for Nginx
-* Create non-sudo user `treetracker` to run nodejs apps
-* Create deployment script 
-* Add systemd service files
+* Deployment playbook 
+* PM2 for managing node.js apps
 * Configure Nginx
 * Install Certbot
 * Obtain SSL certificate, set up renewal cronjob
-* Packer, Ansible, Terraform, Docker, etc
+
+## Roadmap
+
+These tools will be helpful in improving developer productivity and delivery velocity:
+
+- Vagrant
+- Terraform
+- Docker
+- Docker Compose
+- Kubernetes
