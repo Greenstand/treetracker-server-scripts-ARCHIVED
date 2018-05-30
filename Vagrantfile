@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "treetracker-app" do |app|
     app.vm.box = "ubuntu/xenial64"
     app.vm.hostname = "treetracker-app"
+    app.vm.network "forwarded_port", guest: 80, host: 8080
     app.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/configuration.yml"
     end
