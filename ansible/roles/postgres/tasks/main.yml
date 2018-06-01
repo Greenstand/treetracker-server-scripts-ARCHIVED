@@ -1,0 +1,21 @@
+---
+- name: add postgres repo key
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+- name: Add postgres repo
+  apt_repository:
+    filename: pgdg
+    repo: deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
+    state: present
+- name: install Postgres
+  apt:
+    name: "{{ item }}"
+    update_cache: true
+    state: present
+    cache_valid_time: 3600
+  with_items:
+    - postgresql-9.6
+    - postgresql-9.6-postgis-2.3
+    - postgresql-contrib-9.6
+    - postgresql-9.6-postgis-scripts

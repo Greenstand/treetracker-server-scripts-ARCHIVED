@@ -1,0 +1,12 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+- name: Allow Nginx in UFW
+  ufw:
+    state: enabled
+    rule: allow
+    name: Nginx Full
