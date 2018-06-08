@@ -1,0 +1,5 @@
+#cloud-config
+users:
+  - name: deploy
+    ssh_import_id:
+    - gh:jonleibowitz
