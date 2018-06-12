@@ -33,3 +33,8 @@
     - name: Install Postgres
       include_role:
         name: postgres
+
+- name: perform git clone with deploy user
+  hosts: all
+  roles:
+    - role: deploy

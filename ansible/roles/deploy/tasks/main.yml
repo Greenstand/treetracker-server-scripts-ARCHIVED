@@ -1,0 +1,31 @@
+---
+- name: clone web map
+  git:
+    repo: https://github.com/Greenstand/treetracker-web-map.git
+    dest: /home/deploy/treetracker-web-map
+  become: true
+  become_user: deploy
+- name: clone admin panel
+  git:
+    repo: https://github.com/Greenstand/treetracker-admin.git
+    dest: /home/deploy/treetracker-admin
+  become: true
+  become_user: deploy
+- name: clone map api
+  git:
+    repo: https://github.com/Greenstand/treetracker-map-api.git
+    dest: /home/treetracker/treetracker-map-api
+  become: true
+  become_user: treetracker
+- name: clone mobile api
+  git:
+    repo: https://github.com/Greenstand/treetracker-mobile-api.git
+    dest: /home/treetracker/treetracker-mobile-api
+  become: true
+  become_user: treetracker
+- name: clone admin api
+  git:
+    repo: https://github.com/Greenstand/treetracker-admin-api.git
+    dest: /home/treetracker/treetracker-admin-api
+  become: true
+  become_user: treetracker
