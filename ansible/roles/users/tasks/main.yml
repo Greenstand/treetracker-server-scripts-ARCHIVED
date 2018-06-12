@@ -1,0 +1,21 @@
+---
+- name: add 'treetracker' user
+  user:
+    name: treetracker
+    shell: /bin/bash
+    createhome: yes
+    state: present
+- name: Add 'deploy' user
+  user:
+    name: deploy
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+    state: present
+- name: Set passwordless sudo
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%sudo'
+    line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'

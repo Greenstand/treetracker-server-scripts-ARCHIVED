@@ -1,0 +1,24 @@
+server {
+    server_name treetracker.org;
+    return 301 $scheme://www.treetracker.org$request_uri;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    root /var/www/treetracker;
+    index index.html;
+
+    server_name www.treetracker.org;
+
+    location / {
+        autoindex off;
+    }
+
+    location ^~ /admin/ {
+        deny all;
+        alias /var/www/treetracker-admin/;
+        autoindex off;
+    }
+}

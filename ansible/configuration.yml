@@ -17,98 +17,24 @@
         upgrade: dist
         update_cache: yes
         cache_valid_time: 3600
-    - name: Add 'deploy' user
-      user:
-        name: deploy
-        shell: /bin/bash
-        groups: sudo
-        append: yes
-    - name: Set passwordless sudo
-      lineinfile:
-        path: /etc/sudoers
-        state: present
-        regexp: '^%sudo'
-        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
-        validate: 'visudo -cf %s'
-    - name: Allow OpenSSH in UFW
-      ufw:
-        state: enabled
-        rule: allow
-        name: OpenSSH
-    - name: Disallow password authentication
-      lineinfile:
-        dest: /etc/ssh/sshd_config
-        regexp: "^PasswordAuthentication"
-        line: "PasswordAuthentication no"
-        state: present
-      notify: Restart ssh
-    - name: Disallow root SSH access
-      lineinfile:
-        dest: /etc/ssh/sshd_config
-        regexp: "^PermitRootLogin"
-        line: "PermitRootLogin no"
-        state: present
-      notify: Restart ssh
-    - name: Install Nginx
-      apt:
-        name: nginx
-        state: present
-        update_cache: yes
-        cache_valid_time: 3600
-    - name: Allow Nginx in UFW
-      ufw:
-        state: enabled
-        rule: allow
-        name: Nginx Full
-    - name: Add nodesource gpg key
-      apt_key:
-        url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-        state: present
-    - name: Add nodesource repo
-      apt_repository:
-        repo: deb https://deb.nodesource.com/node_8.x xenial main
-        filename: nodesource
-        state: present
-    - name: add nodesource source repo
-      apt_repository:
-        repo: deb-src https://deb.nodesource.com/node_8.x xenial main
-        filename: nodesource
-        state: present
-    - name: install nodejs
-      apt:
-        name: nodejs
-        state: present
-        update_cache: yes
-        cache_valid_time: 3600
-    - name: add postgres repo key
-      apt_key:
-        url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
-        state: present
-    - name: Add postgres repo
-      apt_repository:
-        filename: pgdg
-        repo: deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
-        state: present
-    - name: install Postgres
-      apt:
-        name: "{{ item }}"
-        update_cache: true
-        state: present
-        cache_valid_time: 3600
-      with_items:
-        - postgresql-9.6
-        - postgresql-9.6-postgis-2.3
-        - postgresql-contrib-9.6
-        - postgresql-9.6-postgis-scripts
 
-    - name: add 'treetracker' user
-      user:
-        name: treetracker
-        state: present
-        shell: /bin/bash
-        createhome: yes
-  handlers:
-  - name: Restart ssh
-    service:
-      name: ssh
-      state: restarted
+    - name: Set up users
+      include_role:
+        name: users
+    - name: Harden SSH config
+      include_role:
+        name: ssh
+    - name: Install Nginx
+      include_role:
+        name: nginx
+    - name: Install NodeJS
+      include_role:
+        name: nodejs
+    - name: Install Postgres
+      include_role:
+        name: postgres
+
+- name: perform git clone with deploy user
+  hosts: all
+  roles:
+    - role: deploy
