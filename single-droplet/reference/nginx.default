@@ -57,7 +57,7 @@ server {
 
 	location ^~ /api/mobile {
         
-        access_log /var/log/nginx/my_tracking.access.log postdata;
+        access_log /var/log/nginx/mobile_api.access.log postdata;
         echo_read_request_body;
 
 		rewrite ^/api/mobile/(.*)$ /$1$is_args$args; break;
