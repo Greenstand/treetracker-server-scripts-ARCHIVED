@@ -10,6 +10,7 @@ db-migrate up
 cd ../
 cd treetracker-mobile-api
 git fetch origin master
+git reset -- hard
 git checkout deploy.1
 git pull
 npm install
@@ -17,6 +18,7 @@ cd ../
 
 cd treetracker-web-map
 git fetch origin master
+git reset -- hard
 git checkout deploy.1
 git pull
 cd server
@@ -28,6 +30,7 @@ cd ../../
 
 cd treetracker-admin-api
 git fetch origin master
+git reset -- hard
 git checkout deploy.1
 git pull
 cd server
