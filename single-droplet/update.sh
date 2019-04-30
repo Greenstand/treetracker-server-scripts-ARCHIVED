@@ -10,7 +10,7 @@ db-migrate up
 cd ../
 cd treetracker-mobile-api
 git fetch origin master
-git reset -- hard
+git reset --hard
 git checkout deploy.1
 git pull
 npm install
@@ -18,7 +18,7 @@ cd ../
 
 cd treetracker-web-map
 git fetch origin master
-git reset -- hard
+git reset --hard
 git checkout deploy.1
 git pull
 cd server
@@ -30,7 +30,7 @@ cd ../../
 
 cd treetracker-admin-api
 git fetch origin master
-git reset -- hard
+git reset --hard
 git checkout deploy.1
 git pull
 cd server
@@ -45,9 +45,9 @@ cd ../../
 cd treetracker-server-scripts/single-droplet
 ./start.sh
 
-journalctl -n 40  -u treetracker-map-api.service
-journalctl -n 40  -u treetracker-mobile-api.service
-journalctl -n 40  -u treetracker-admin-api.service
+#journalctl -n 40  -u treetracker-map-api.service
+#journalctl -n 40  -u treetracker-mobile-api.service
+#journalctl -n 40  -u treetracker-admin-api.service
 
 systemctl status treetracker-map-api.service
 systemctl status treetracker-mobile-api.service
