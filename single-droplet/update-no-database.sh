@@ -1,17 +1,16 @@
 #!/bin/bash
+
+set -e
+
 cp systemd/* /etc/systemd/user/
 systemctl daemon-reload
 ./stop.sh
 cd ../../
 
-cd treetracker-database-migrations
-git pull
-db-migrate up
-cd ../
 cd treetracker-mobile-api
 git fetch origin master
 git reset --hard
-git checkout deploy.1
+git checkout release
 git pull
 npm install
 cd ../
@@ -19,7 +18,7 @@ cd ../
 cd treetracker-web-map
 git fetch origin master
 git reset --hard
-git checkout deploy.1
+git checkout release
 git pull
 cd server
 npm install
@@ -31,7 +30,7 @@ cd ../../
 cd treetracker-admin
 git fetch origin master
 git reset --hard
-git checkout deploy.1
+git checkout release
 git pull
 cd server
 npm install

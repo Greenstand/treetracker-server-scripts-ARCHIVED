@@ -8,8 +8,8 @@ Environment=NODE_PORT=3002
 Environment=NODE_ENV=treetracker
 Type=simple
 User=root
-WorkingDirectory=/root/treetracker-admin-api/server/server/
-ExecStart=/usr/bin/node /root/treetracker-admin-api/server/server/server.js
+WorkingDirectory=/root/treetracker-admin/server/server/
+ExecStart=/usr/bin/node /root/treetracker-admin/server/server/server.js
 Restart=on-failure
 
 [Install]
