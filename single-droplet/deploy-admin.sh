@@ -2,6 +2,7 @@
 systemctl stop treetracker-admin-api
 cd treetracker-admin-api
 cd server
+npm i
 npm run-script build
 cd ../
 cd client
