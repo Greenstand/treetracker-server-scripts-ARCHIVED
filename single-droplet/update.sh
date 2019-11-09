@@ -9,18 +9,16 @@ git pull
 db-migrate up
 cd ../
 cd treetracker-mobile-api
-git fetch origin master
+git fetch origin
 git reset --hard
-git checkout deploy.1
-git pull
+git checkout origin/release
 npm install
 cd ../
 
 cd treetracker-web-map
-git fetch origin master
+git fetch origin
 git reset --hard
-git checkout deploy.1
-git pull
+git checkout origin/release
 cd server
 npm install
 cd ../client
@@ -29,12 +27,13 @@ cp -Rp * /var/www/html/
 cd ../../
 
 cd treetracker-admin
-git fetch origin master
+git fetch origin
 git reset --hard
-git checkout deploy.1
-git pull
+git checkout origin/release
 cd server
 npm install
+rm -Rf dist/
+npm run-script build
 cd ../client
 npm install
 npm run-script build
