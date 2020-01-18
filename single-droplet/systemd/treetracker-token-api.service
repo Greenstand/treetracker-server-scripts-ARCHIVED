@@ -1,0 +1,15 @@
+[Unit]
+Description=Treetracker Token API
+Documentation=https://github.com/Greenstand
+After=network.target
+
+[Service]
+Environment=NODE_PORT=3006
+Type=simple
+User=root
+WorkingDirectory=/root/treetracker-token-trading-api/
+ExecStart=/usr/bin/node /root/treetracker-token-trading-api/server.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
